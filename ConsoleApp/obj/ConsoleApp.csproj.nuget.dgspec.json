@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mcy/Desktop/ConsoleApp/ConsoleApp.csproj": {}
+    "/Users/mcy/Documents/GitHub/ObligationDuties/ConsoleApp/ConsoleApp.csproj": {}
   },
   "projects": {
-    "/Users/mcy/Desktop/ConsoleApp/ConsoleApp.csproj": {
+    "/Users/mcy/Documents/GitHub/ObligationDuties/ConsoleApp/ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mcy/Desktop/ConsoleApp/ConsoleApp.csproj",
+        "projectUniqueName": "/Users/mcy/Documents/GitHub/ObligationDuties/ConsoleApp/ConsoleApp.csproj",
         "projectName": "ConsoleApp",
-        "projectPath": "/Users/mcy/Desktop/ConsoleApp/ConsoleApp.csproj",
+        "projectPath": "/Users/mcy/Documents/GitHub/ObligationDuties/ConsoleApp/ConsoleApp.csproj",
         "packagesPath": "/Users/mcy/.nuget/packages/",
-        "outputPath": "/Users/mcy/Desktop/ConsoleApp/obj/",
+        "outputPath": "/Users/mcy/Documents/GitHub/ObligationDuties/ConsoleApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mcy/.nuget/NuGet/NuGet.Config"

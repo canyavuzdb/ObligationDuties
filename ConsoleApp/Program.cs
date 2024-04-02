@@ -17,7 +17,7 @@ public class KarakterSayma
 
         int sayi = KarakterSay(cumle, arananKarakter, duyarlilik); // Harf tekrar sayisi
 
-        Console.WriteLine($"'{arananKarakter}' karakteri metin içinde {sayi} defa geçmektedir."); // Sonucu goster
+        Console.WriteLine($"'{arananKarakter}' karakteri metin icinde {sayi} defa gecmektedir."); // Sonucu goster
     }
 
     public static int GetKarakterDeger(string mesaj, int min, int max)
@@ -31,13 +31,13 @@ public class KarakterSayma
             if (sayiDegeri == 0)
             {
 
-                Console.WriteLine("Geçerli bir sayı giriniz!");
+                Console.WriteLine("Gecerli bir sayi giriniz!");
                 continue;
             }
 
             if (sayiDegeri < min || sayiDegeri > max)
             {
-                Console.WriteLine($"{min} ile {max} arasında bir sayı giriniz!");
+                Console.WriteLine($"{min} ile {max} arasinda bir sayi giriniz!");
                 continue;
             }
 
@@ -57,7 +57,7 @@ public class KarakterSayma
                 return cumle;
             }
 
-            Console.WriteLine("Karakter limiti aşıldı! Tekrar deneyiniz.");
+            Console.WriteLine("Karakter limiti asildi! Tekrar deneyiniz.");
         }
     }
 
@@ -65,7 +65,7 @@ public class KarakterSayma
     {
         while (true)
         {
-            Console.WriteLine("Büyük/küçük harf duyarlılığı aktif olsun mu? (Evet(e)/Hayır(h)): ");
+            Console.WriteLine("Buyuk/kucuk harf duyarliliği aktif olsun mu? (Evet(e)/Hayir(h)): ");
             string? cevap = Console.ReadLine();
 
             if (cevap.Equals("e"))
@@ -85,16 +85,22 @@ public class KarakterSayma
     {
         while (true)
         {
-            Console.WriteLine("Analiz etmek için bir harf giriniz: ");
-            char karakter = Console.ReadKey().KeyChar;
+            Console.WriteLine("Analiz etmek icin bir harf giriniz: ");
+            string? input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Gecerli bir karakter giriniz!");
+                continue;
+            }
             Console.WriteLine();
 
+            char karakter = input[0];
             if (char.IsLetterOrDigit(karakter))
             {
                 return karakter;
             }
 
-            Console.WriteLine("Geçerli bir karakter giriniz!");
+            Console.WriteLine("Gecerli bir karakter giriniz!");
         }
     }
 
@@ -110,8 +116,12 @@ public class KarakterSayma
         //     cumle = cumle.ToLower();
         //     arananKarakter = char.ToLower(arananKarakter);
         // }
+        
         string duyarlilikCumle = duyarlilik ? cumle.ToUpper() : cumle.ToLower();
         char duyarlilikArananKarakter = duyarlilik ? char.ToUpper(arananKarakter) : char.ToLower(arananKarakter);
+
+        // Console.WriteLine(duyarlilikCumle);
+        // Console.WriteLine(duyarlilikArananKarakter);
 
         int count = duyarlilikCumle.Count(c => c == duyarlilikArananKarakter);
         return count;
