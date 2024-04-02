@@ -92,7 +92,6 @@ public class KarakterSayma
                 Console.WriteLine("Gecerli bir karakter giriniz!");
                 continue;
             }
-            Console.WriteLine();
 
             char karakter = input[0];
             if (char.IsLetterOrDigit(karakter))
@@ -116,7 +115,7 @@ public class KarakterSayma
         //     cumle = cumle.ToLower();
         //     arananKarakter = char.ToLower(arananKarakter);
         // }
-        
+
         string duyarlilikCumle = duyarlilik ? cumle.ToUpper() : cumle.ToLower();
         char duyarlilikArananKarakter = duyarlilik ? char.ToUpper(arananKarakter) : char.ToLower(arananKarakter);
 
