@@ -43,32 +43,80 @@ public class Program
         string? turGirdi = Console.ReadLine();
         int siralamaTuru = int.TryParse(turGirdi, out int turDeger) ? turDeger : 0;
 
-        // Ürünleri Sırala
-        var siraliUrunler = urunler.OrderBy(x => x.Ad).ThenBy(x => x.Fiyat);
-
-        foreach (var urun in siraliUrunler)
+        switch (siralamaKriteri)
         {
-            Console.WriteLine(urun);
+            case 1:
+                if (siralamaTuru == 1)
+                {
+                    urunler.Sort((x, y) => x.Ad.CompareTo(y.Ad));
+                }
+                else
+                {
+                    urunler.Sort((x, y) => y.Ad.CompareTo(x.Ad));
+                }
+                break;
+            case 2:
+                if (siralamaTuru == 1)
+                {
+                    urunler.Sort((x, y) => x.StokMiktari.CompareTo(y.StokMiktari));
+                }
+                else
+                {
+                    urunler.Sort((x, y) => y.StokMiktari.CompareTo(x.StokMiktari));
+                }
+                break;
+            case 3:
+                if (siralamaTuru == 1)
+                {
+                    urunler.Sort((x, y) => x.DegerlendirmePuani.CompareTo(y.DegerlendirmePuani));
+                }
+                else
+                {
+                    urunler.Sort((x, y) => y.DegerlendirmePuani.CompareTo(x.DegerlendirmePuani));
+                }
+                break;
         }
 
-        // Sıralama Yönünü Belirle
-        if (siralamaTuru == 2)
+        // Sıralanmış ürün listesini yazdırın.
+        foreach (Urun urun in urunler)
         {
-            urunler.Reverse();
+            Console.WriteLine("Urun Adı: {0} - Birim Fiyatı: {1} - Stok Miktarı: {2} - Degerlendirme Puanı: {3}", urun.Ad, urun.Fiyat, urun.StokMiktari, urun.DegerlendirmePuani);
         }
-
         // Ürünleri Yazdır
         Console.WriteLine("-------------------");
-        foreach (var urun in urunler)
+
+
+        // Sepete Ekleme
+        bool sepeteUrunEklemeIstegi = true;
+
+        while (sepeteUrunEklemeIstegi)
         {
-            Console.WriteLine("Ad: {0}", urun.Ad);
-            Console.WriteLine("Fiyat: {0}", urun.Fiyat);
-            Console.WriteLine("Stok Miktarı: {0}", urun.StokMiktari);
-            Console.WriteLine("Değerlendirme Puanı: {0}", urun.DegerlendirmePuani);
-            Console.WriteLine("-------------------");
+            Console.WriteLine("Sepete Ürün Eklemek İster misiniz? (Evet(e)/Hayır(h)): ");
+            string sepeteEklemeIstegiStr = Console.ReadLine();
+
+            if (sepeteEklemeIstegiStr.ToLower() == "e")
+            {
+                SepeteUrunEkle(urunler);
+            }
+            else if (sepeteEklemeIstegiStr.ToLower() == "h")
+            {
+                sepeteUrunEklemeIstegi = false;
+
+                // Sepet durumunu gösterin.
+                // Örnek:
+                foreach (Urun urun in urunler)
+                {
+                    Console.WriteLine("Urun Adı: {0} - Birim Fiyatı: {1} - Stok Miktarı: {2} - Degerlendirme Puanı: {3}", urun.Ad, urun.Fiyat, urun.StokMiktari, urun.DegerlendirmePuani);
+                }
+
+                Console.WriteLine("Uygulama Sonlandırılıyor...");
+            }
+            else
+            {
+                Console.WriteLine("Geçersiz bir seçim yaptınız. Lütfen 'E' veya 'H' giriniz.");
+            }
         }
 
- 
     }
 
     static List<Urun> UrunleriAl()
@@ -149,7 +197,6 @@ public class Program
             {
                 Console.Write("Stok Miktarı: ");
                 string stokMiktariDeger = Console.ReadLine();
-
                 if (!int.TryParse(stokMiktariDeger, out stokMiktari))
                 {
                     Console.WriteLine("Geçersiz bir stok miktarı girdiniz. Lütfen sadece rakam giriniz! (Örn: 1)");
@@ -167,7 +214,11 @@ public class Program
             {
                 Console.Write("Değerlendirme Puanı (5 üzerinden): ");
                 string degerlendirmePuaniDeger = Console.ReadLine();
-                degerlendirmePuani = double.TryParse(degerlendirmePuaniDeger, out degerlendirmePuani) ? degerlendirmePuani : 0;
+                if (!double.TryParse(degerlendirmePuaniDeger, out degerlendirmePuani))
+                {
+                    Console.WriteLine("Geçersiz bir degerlendirme puanı girdiniz. Lütfen sadece belirtilen aramlara sahip rakam giriniz! (Örn: 3.5)");
+                    continue;
+                }
                 if (degerlendirmePuani < 0 || degerlendirmePuani > 5)
                 {
                     Console.WriteLine("Değerlendirme puanı 0 ile 5 arasında olmalıdır!");
@@ -179,4 +230,10 @@ public class Program
 
         return urunler;
     }
+
+    static void SepeteUrunEkle(List<Urun> urunler)
+    {
+        
+    }
 }
+
