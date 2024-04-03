@@ -6,6 +6,8 @@ public class KarakterSayma
     {
 
         Console.WriteLine("Karakter sayma programına hosgeldiniz!"); // Uygulamaya hosgeldiniz mesaji
+        Console.WriteLine("**************************************");
+
 
         int maxKarakterSayisi = GetKarakterDeger("Lutfen maksimum karakter sayisini belirleyiniz: ", 1, int.MaxValue); // Maksimum karakter sayisi
 
@@ -18,6 +20,7 @@ public class KarakterSayma
         int sayi = KarakterSay(cumle, arananKarakter, duyarlilik); // Harf tekrar sayisi
 
         Console.WriteLine($"'{arananKarakter}' karakteri metin icinde {sayi} defa gecmektedir."); // Sonucu goster
+        Console.WriteLine("--------------------------------------");
     }
 
     public static int GetKarakterDeger(string mesaj, int min, int max)
@@ -27,17 +30,20 @@ public class KarakterSayma
             Console.WriteLine(mesaj);
             string? girdi = Console.ReadLine();
             int sayiDegeri = int.TryParse(girdi, out int deger) ? deger : 0;
+            Console.WriteLine("--------------------------------------");
 
             if (sayiDegeri == 0)
             {
 
                 Console.WriteLine("Gecerli bir sayi giriniz!");
+                Console.WriteLine("--------------------------------------");
                 continue;
             }
 
             if (sayiDegeri < min || sayiDegeri > max)
             {
                 Console.WriteLine($"{min} ile {max} arasinda bir sayi giriniz!");
+                Console.WriteLine("--------------------------------------");
                 continue;
             }
 
@@ -51,6 +57,8 @@ public class KarakterSayma
         {
             Console.WriteLine($"Lutfen {maxKarakterSayisi} karakterden az ya da esit karaktere sahip bir cumle giriniz: ");
             string? cumle = Console.ReadLine();
+            Console.WriteLine("--------------------------------------");
+            
 
             if (cumle.Length <= maxKarakterSayisi)
             {
@@ -58,6 +66,7 @@ public class KarakterSayma
             }
 
             Console.WriteLine("Karakter limiti asildi! Tekrar deneyiniz.");
+            Console.WriteLine("--------------------------------------");
         }
     }
 
@@ -67,6 +76,7 @@ public class KarakterSayma
         {
             Console.WriteLine("Buyuk/kucuk harf duyarliliği aktif olsun mu? (Evet(e)/Hayir(h)): ");
             string? cevap = Console.ReadLine();
+            Console.WriteLine("--------------------------------------");
 
             if (cevap.Equals("e"))
             {
@@ -78,6 +88,7 @@ public class KarakterSayma
             }
 
             Console.WriteLine("Geçersiz cevap! Lütfen 'Evet' veya 'Hayır' giriniz.");
+            Console.WriteLine("--------------------------------------");
         }
     }
 
@@ -87,9 +98,11 @@ public class KarakterSayma
         {
             Console.WriteLine("Analiz etmek icin bir harf giriniz: ");
             string? input = Console.ReadLine();
+            Console.WriteLine("--------------------------------------");
             if (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("Gecerli bir karakter giriniz!");
+                Console.WriteLine("--------------------------------------");
                 continue;
             }
 
@@ -100,6 +113,7 @@ public class KarakterSayma
             }
 
             Console.WriteLine("Gecerli bir karakter giriniz!");
+            Console.WriteLine("--------------------------------------");
         }
     }
 
