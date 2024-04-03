@@ -208,22 +208,31 @@ public class Program
                 }
             } while (stokMiktari < 1);
 
-            // Degerlendirme puani
+            // Degerlendirme Puani
             double degerlendirmePuani;
+            bool gecerliDegerlendirmePuani = false;
             do
             {
                 Console.Write("Değerlendirme Puanı (5 üzerinden): ");
                 string degerlendirmePuaniDeger = Console.ReadLine();
+
                 if (!double.TryParse(degerlendirmePuaniDeger, out degerlendirmePuani))
                 {
-                    Console.WriteLine("Geçersiz bir degerlendirme puanı girdiniz. Lütfen sadece belirtilen aramlara sahip rakam giriniz! (Örn: 3.5)");
+                    Console.WriteLine("Geçersiz bir değerlendirme puanı girdiniz. Lütfen sadece rakam ve virgül giriniz! (Örn: 3,5)");
                     continue;
                 }
+
                 if (degerlendirmePuani < 0 || degerlendirmePuani > 5)
                 {
                     Console.WriteLine("Değerlendirme puanı 0 ile 5 arasında olmalıdır!");
+                    gecerliDegerlendirmePuani = false;
                 }
-            } while (degerlendirmePuani < 0 || degerlendirmePuani > 5);
+                else
+                {
+                    gecerliDegerlendirmePuani = true;
+                }
+
+            } while (!gecerliDegerlendirmePuani);
 
             urunler.Add(new Urun(urunAdi, fiyat, stokMiktari, degerlendirmePuani, urunSayisi, gecersizKarakter));
         }
@@ -233,7 +242,7 @@ public class Program
 
     static void SepeteUrunEkle(List<Urun> urunler)
     {
-        
+
     }
 }
 
