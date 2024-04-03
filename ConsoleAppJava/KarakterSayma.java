@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class KarakterSayma{
+public class KarakterSayma {
     public static void main(String[] args){
 
         System.out.println("Karakter sayma programina hosgeldiniz!");
