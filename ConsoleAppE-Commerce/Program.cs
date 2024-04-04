@@ -6,20 +6,29 @@ public class Urun //Product Modeli -  Models
     public string Ad { get; set; }
     public double Fiyat { get; set; }
     public int StokMiktari { get; set; }
-    public int UrunAdet { get; set; }
+    public int UrunCesit { get; set; }
     public double DegerlendirmePuani { get; set; }
     public bool GecersizKarakter { get; set; }
+    public int  UrunAdet { get; set; }
 
-    public Urun(string ad, double fiyat, int stokMiktari, double degerlendirmePuani, int urunAdet, bool gecersizKarakter)
+    public Urun(string ad, double fiyat, int stokMiktari, double degerlendirmePuani, int urunCesit, bool gecersizKarakter)
     {
         Ad = ad;
         Fiyat = fiyat;
         StokMiktari = stokMiktari;
+        UrunCesit = urunCesit;
+
         DegerlendirmePuani = degerlendirmePuani;
-        UrunAdet = urunAdet;
         GecersizKarakter = gecersizKarakter;
     }
 }
+
+// public class Sepet
+// {
+//     public List<Urun> Urunler { get; set; }
+//     public int UrunAdet { get; set; }
+//     public int ToplamTutar { get; set; }
+// }
 
 public class Program
 {
@@ -96,7 +105,45 @@ public class Program
 
             if (sepeteEklemeIstegiStr.ToLower() == "e")
             {
-                SepeteUrunEkle(urunler);
+                while (sepeteUrunEklemeIstegi)
+                {
+                    Console.WriteLine("Ürün adını giriniz:");
+                    string urunAdi = Console.ReadLine();
+
+                    Console.WriteLine("Kaç adet ürün eklemek istiyorsunuz?: ");
+                    int miktarStr = int.Parse(Console.ReadLine());
+
+                    if (miktarStr >= 2)
+                    {
+                        Urun urun = urunler.Find(x => x.Ad == urunAdi);
+
+                        if (urun == null)
+                        {
+                            Console.WriteLine("Ürün bulunamadı!");
+                            continue;
+                        }
+
+                        if (urun.StokMiktari >= miktarStr)
+                        {
+                            for (int i = 0; i < miktarStr; i++)
+                            {
+                                
+                                Console.WriteLine("{0} ürünü sepete eklendi.", urunAdi);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stokta yeterli ürün bulunmamaktadır! Mevcut stok: {0}", urun.StokMiktari);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("En az 2 ürün eklemeniz gerekiyor!");
+                    }
+                }
+
+
+                // List<Urun> urunler = UrunleriAl();
             }
             else if (sepeteEklemeIstegiStr.ToLower() == "h")
             {
@@ -111,40 +158,42 @@ public class Program
 
                 Console.WriteLine("Uygulama Sonlandırılıyor...");
             }
+            // else if(){
+
+            // }
             else
             {
                 Console.WriteLine("Geçersiz bir seçim yaptınız. Lütfen 'E' veya 'H' giriniz.");
             }
         }
 
-        // List<Urun> sepet = new List<Urun>();
-
+        // List<Sepet> sepetler = SepeteUrunEkle();
 
     }
 
 
 
-    static List<Urun> UrunleriAl()
+    public static List<Urun> UrunleriAl()
     {
         // Urun  Sayisini Belirleme
-        int urunSayisi;
+        int urunCesidi;
         do
         {
             Console.WriteLine("Kaç Adet Ürün Gireceksiniz?");
             string? urunGirdi = Console.ReadLine();
-            urunSayisi = int.TryParse(urunGirdi, out int urunDeger) ? urunDeger : 0;
+            urunCesidi = int.TryParse(urunGirdi, out int urunDeger) ? urunDeger : 0;
 
-            if (urunSayisi <= 0)
+            if (urunCesidi <= 0)
             {
                 Console.WriteLine("En az 1 adet ürün girmeniz gerekir!");
             }
-        } while (urunSayisi <= 0);
+        } while (urunCesidi <= 0);
 
 
 
         // Urunlerin Listeye Eklenmesi
         List<Urun> urunler = new List<Urun>();
-        for (int i = 0; i < urunSayisi; i++)
+        for (int i = 0; i < urunCesidi; i++)
         {
             Console.WriteLine("{0}. Urun Bilgilerini Girinniz:", i + 1);
 
@@ -239,47 +288,107 @@ public class Program
 
             } while (!gecerliDegerlendirmePuani);
 
-            urunler.Add(new Urun(urunAdi, fiyat, stokMiktari, degerlendirmePuani, urunSayisi, gecersizKarakter));
+            urunler.Add(new Urun(urunAdi, fiyat, stokMiktari, degerlendirmePuani, urunCesidi, gecersizKarakter));
         }
 
         return urunler;
     }
 
-    static void SepeteUrunEkle(List<Urun> urunler)
+
+    public static List<Urun> UrunleriListele()
     {
 
-        while (urunler.Count < 2)
-        {
+        List<Urun> urunler = new List<Urun>();
 
-            Console.WriteLine("Urun Adi: ");
-            string urunAdi = Console.ReadLine();
+        // while (true)
+        // {
+        //     Console.WriteLine("Kaç adet ürün eklemek istiyorsunuz?: ");
+        //     int miktarStr = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Eklemek istediginiz urun adedini giriniz: ");
-            string? urunAdediGirdi = Console.ReadLine();
-            int urunAdedi = int.TryParse(urunAdediGirdi, out int urunDegeri) ? urunDegeri : 0;
+        //     if (miktarStr >= 2)
+        //     {
+        //         for (int i = 0; i < miktarStr; i++)
+        //         {
+        //             string stoktaMi = Console.ReadLine();
+        //             Console.WriteLine("Urun Miktarını Giriniz: ");
+        //             Urun urun = urunler.Find(x => x.Ad == stoktaMi);
+        //             if (urun == null)
+        //             {
+        //                 Console.WriteLine("Ürün bulunamadı!");
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("{0} ürünü sepete eklendi.", urun.Ad);
+
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("En az 2 ürün eklemeniz gerekiyor!");
+        //     }
+        // }
 
 
-            Urun urun = urunler.Find(x => x.Ad == urunAdi);
-            if (urun != null)
-            {
-                if (urun.StokMiktari >= urunAdedi)
-                {
-                    urun.StokMiktari -= urunAdedi;
-                    urunler.Add(new Urun(urun.Ad, urun.Fiyat, urunAdedi, urun.DegerlendirmePuani));
-                    Console.WriteLine("{0} ürünü sepete eklendi ({1} adet).", urun.Ad, urunAdedi);
-                }
-                else
-                {
-                    Console.WriteLine("Stokta yeterli ürün bulunmuyor! ({0} adet)", urun.StokMiktari);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Girdiğiniz ürün listede bulunamadı!");
-            }
-        }
+
+
+        // while (true)
+        // {
+        //     Console.WriteLine("Kaç adet ürün eklemek istiyorsunuz?: ");
+        //     int urunAdedi = int.Parse(Console.ReadLine());
+
+        //     if (urunAdedi >= 2)
+        //     {
+        //         for (int i = 0; i < urunAdedi; i++)
+        //         {
+        //             Console.WriteLine("{0}. Ürün Adı: ", i + 1);
+        //             string urunAdi = Console.ReadLine();
+        //             Urun urun = urunler.Find(x => x.Ad == urunAdi);
+
+        //             if (urun != null && urun.StokMiktari > 0)
+        //             {
+        //                 urun.StokMiktari--;
+        //                 urunler.Add(urun);
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("{0} ürünü stokta bulunmuyor!", urunAdi);
+        //             }
+        //         }
+
+        //         // Sepet tutarını hesapla
+        //         HesaplaSepetTutarini(urunler);
+
+        //         break; // Döngüden çık
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("En az 2 ürün eklemeniz gerekiyor!");
+        //     }
+        // }
+        return urunler;
 
     }
+    // static void HesaplaSepetTutarini(List<Urun> urunler)
+    // {
+    //     double toplamTutar = 0;
 
+    //     for (int i = 0; i < urunler.Count; i++)
+    //     {
+    //         toplamTutar += urunler[i].Fiyat * urunler[i].UrunAdet;
+    //     }
+
+    //     Console.WriteLine("Sepet Tutarı: {0}", toplamTutar);
+    // }
+
+
+    // static List<Sepet> SepeteUrunEkle()
+    // {
+    //     List<Sepet> sepetler = new List<Sepet>();
+    //     return sepetler;
+
+
+
+    // }
 }
 
