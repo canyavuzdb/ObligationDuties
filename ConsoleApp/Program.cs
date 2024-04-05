@@ -9,13 +9,13 @@ public class KarakterSayma
         Console.WriteLine("**************************************");
 
 
-        int maxKarakterSayisi = GetKarakterDeger("Lutfen maksimum karakter sayisini belirleyiniz: ", 1, int.MaxValue); // Maksimum karakter sayisi
+        int maxKarakterSayisi = KarakterDeger("Lutfen maksimum karakter sayisini belirleyiniz: ", 1, int.MaxValue); // Maksimum karakter sayisi
 
-        string cumle = GetCumle(maxKarakterSayisi); // Cumle girişi
+        string cumle = Cumle(maxKarakterSayisi); // Cumle girişi
 
-        bool duyarlilik = GetDuyarlilik(); // Buyuk/Kucuk harf duyarliliği
+        bool duyarlilik = Duyarlilik(); // Buyuk/Kucuk harf duyarliliği
 
-        char arananKarakter = GetKarakter(); // Harf girisi
+        char arananKarakter = Karakter(); // Harf girisi
 
         int sayi = KarakterSay(cumle, arananKarakter, duyarlilik); // Harf tekrar sayisi
 
@@ -23,7 +23,7 @@ public class KarakterSayma
         Console.WriteLine("--------------------------------------");
     }
 
-    public static int GetKarakterDeger(string mesaj, int min, int max)
+    public static int KarakterDeger(string mesaj, int min, int max)
     {
         while (true)
         {
@@ -51,7 +51,7 @@ public class KarakterSayma
         }
     }
 
-    public static string GetCumle(int maxKarakterSayisi)
+    public static string Cumle(int maxKarakterSayisi)
     {
         while (true)
         {
@@ -70,7 +70,7 @@ public class KarakterSayma
         }
     }
 
-    public static bool GetDuyarlilik()
+    public static bool Duyarlilik()
     {
         while (true)
         {
@@ -92,7 +92,7 @@ public class KarakterSayma
         }
     }
 
-    public static char GetKarakter()
+    public static char Karakter()
     {
         while (true)
         {

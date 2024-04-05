@@ -5,20 +5,20 @@ public class KarakterSayma {
 
         System.out.println("Karakter sayma programina hosgeldiniz!");
 
-        int maxKarakterSayisi = GetKarakterDeger("Lutfen maksimum karakter sayisini belirleyiniz: ", 1, Integer.MAX_VALUE);
+        int maxKarakterSayisi = KarakterDeger("Lutfen maksimum karakter sayisini belirleyiniz: ", 1, Integer.MAX_VALUE);
 
-        String cumle = GetCumle(maxKarakterSayisi);
+        String cumle = Cumle(maxKarakterSayisi);
         
-        boolean duyarlilik = GetDuyarlilik();
+        boolean duyarlilik = Duyarlilik();
 
-        char arananKarakter = GetKarakter();
+        char arananKarakter = Karakter();
 
         int sayi = KarakterSay(cumle, arananKarakter, duyarlilik);
 
         System.out.println("Girdiginiz cumlede " + sayi + " adet " + arananKarakter + " karakteri vardir.");
     }   
 
-    public static int GetKarakterDeger(String mesaj, int min, int max)
+    public static int KarakterDeger(String mesaj, int min, int max)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -43,7 +43,7 @@ public class KarakterSayma {
         }
     }
 
-    public static String GetCumle(int maxKarakterSayisi)
+    public static String Cumle(int maxKarakterSayisi)
     {
         Scanner scanner = new Scanner(System.in);
         while (true)
@@ -60,7 +60,7 @@ public class KarakterSayma {
         
     }
 
-    public static boolean GetDuyarlilik()
+    public static boolean Duyarlilik()
     {
         Scanner scanner = new Scanner(System.in);
         while (true)
@@ -80,7 +80,7 @@ public class KarakterSayma {
 
     }
 
-    public static char GetKarakter()
+    public static char Karakter()
     {
         Scanner scanner = new Scanner(System.in);
         while (true)
