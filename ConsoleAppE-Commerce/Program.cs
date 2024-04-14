@@ -29,7 +29,7 @@ public class Sepet
         Urunler = new List<Urun>();
     }
 
-    public void UrunEkle(Urun urun, int adet, int urunAdet)
+    public void SepeteUrunEkle(Urun urun, int adet, int urunAdet)
     {
         if (urun.StokMiktari >= adet)
         {
@@ -37,7 +37,7 @@ public class Sepet
             Urunler.Add(urun);
             urun.UrunAdet = urunAdet;
 
-            HesaplaSepetTutarini();
+            SepetTutariniHesapla();
 
             Console.WriteLine("Sepetiniz Guncellendi:");
             foreach (Urun urunSepette in Urunler)
@@ -53,7 +53,7 @@ public class Sepet
     }
 
 
-    public void HesaplaSepetTutarini()
+    public void SepetTutariniHesapla()
     {
         ToplamTutar = 0;
 
@@ -63,7 +63,7 @@ public class Sepet
         }
     }
 
-    public void SepetOnaylama()
+    public void SepetiOnayla()
     {
         Console.WriteLine("Sepetinizi onayliyor musunuz? (Evet(e)/Hayir(h)): ");
         string? sepetOnayStr = Console.ReadLine();
@@ -75,7 +75,7 @@ public class Sepet
         else if (sepetOnayStr.ToLower() != "h")
         {
             Console.WriteLine("Gecersiz bir secim yaptiniz. Lutfen 'E' veya 'H' giriniz.");
-            SepetOnaylama();
+            SepetiOnayla();
         }
     }
 }
@@ -84,7 +84,7 @@ public class Program
 {
     static void Main(string[] args)
     {
-        List<Urun> urunler = UrunleriAl();
+        List<Urun> urunler = KullanicidanUrunleriAl();
 
         SiralamaIslemleri(urunler);
 
@@ -147,7 +147,7 @@ public class Program
                         continue;
                     }
 
-                    sepet.UrunEkle(urun, miktarStr, miktarStr);
+                    sepet.SepeteUrunEkle(urun, miktarStr, miktarStr);
                 }
                 else
                 {
@@ -163,7 +163,7 @@ public class Program
                 sepeteUrunEklemeIstegi = false;
             }
         }
-        sepet.SepetOnaylama();
+        sepet.SepetiOnayla();
     }
     public static void SiralamaIslemleri(List<Urun> urunler)
     {
@@ -219,7 +219,7 @@ public class Program
             Console.WriteLine("Urun Adi: {0} - Birim Fiyati: {1} - Stok Miktari: {2} - Degerlendirme Puani: {3}", urun.Ad, urun.Fiyat, urun.StokMiktari, urun.DegerlendirmePuani);
         }
     }
-    public static List<Urun> UrunleriAl()
+    public static List<Urun> KullanicidanUrunleriAl()
     {
         // Urun  Sayisini Belirleme
         int urunCesidi;
